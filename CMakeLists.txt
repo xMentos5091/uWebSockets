@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lz -lssl -lcrypto")
 
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_INSTALL_PREFIX}/external/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_INSTALL_PREFIX}/lib)
 include_directories(uSockets/src)
 set(uWebSockets_src
   uSockets/src/ssl.c
@@ -56,7 +56,7 @@ file(GLOB UWS_HEADERS src/*.h src/libwshandshake.hpp src/f2/function2.hpp)
 install(
   FILES ${UWS_HEADERS}
   COMPONENT ${PROJECT_NAME}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/external/include/uWebSockets
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/uWebSockets
   PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
 )
 
@@ -71,12 +71,12 @@ file(GLOB USOCKETS_HEADERS
 install(
   FILES ${USOCKETS_HEADERS}
   COMPONENT ${PROJECT_NAME}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/external/include/uWebSockets/uSockets
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/uWebSockets/uSockets
   PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
 )
 
-include_directories(${CMAKE_INSTALL_PREFIX}/external/include/uWebSockets)
-include_directories(${CMAKE_INSTALL_PREFIX}/external/include/uWebSockets/uSockets)
+include_directories(${CMAKE_INSTALL_PREFIX}/include/uWebSockets)
+include_directories(${CMAKE_INSTALL_PREFIX}/include/uWebSockets/uSockets)
 
 add_library(uWS SHARED ${uWebSockets_src})
 target_link_libraries(uWS ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES}) # miss libuv
