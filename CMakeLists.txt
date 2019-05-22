@@ -3,7 +3,7 @@ project(uWebSockets VERSION 0.15.6)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DLIBUS_USE_LIBUV -DLIBUS_USE_OPENSSL -flto -O3")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DLIBUS_USE_LIBUV -DLIBUS_USE_OPENSSL -luv -lssl -lcrypto -lz -flto -O3")
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_INSTALL_PREFIX}/lib)
 
@@ -12,7 +12,6 @@ include_directories(${CMAKE_INSTALL_PREFIX}/include/uWebSockets/uSockets)
 include_directories(uSockets/src)
 set(uWebSockets_src
   uSockets/src/ssl.c
-  uSockets/src/interfaces/ssl.h
   uSockets/src/socket.c
   uSockets/src/loop.c
   uSockets/src/context.c
