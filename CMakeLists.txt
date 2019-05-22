@@ -6,7 +6,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lz -lssl -lcrypto")
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_INSTALL_PREFIX}/lib)
-include_directories(uSockets/src)
+
+include_directories(${CMAKE_INSTALL_PREFIX}/include/uWebSockets)
+include_directories(${CMAKE_INSTALL_PREFIX}/include/uWebSockets/uSockets)
 set(uWebSockets_src
   uSockets/src/ssl.c
   uSockets/src/socket.c
@@ -84,8 +86,5 @@ install(
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/uWebSockets/f2
   PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
 )
-
-include_directories(${CMAKE_INSTALL_PREFIX}/include/uWebSockets)
-include_directories(${CMAKE_INSTALL_PREFIX}/include/uWebSockets/uSockets)
 add_library(uWS SHARED ${uWebSockets_src})
 target_link_libraries(uWS ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES}) # miss libuv
