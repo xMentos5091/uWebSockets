@@ -124,4 +124,4 @@ install(
   PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
 )
 add_library(uWS SHARED ${uWebSockets_src})
-target_link_libraries(uWS libuv1 ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES}) # miss libuv
+target_link_libraries(uWS uv ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES}) # miss libuv
