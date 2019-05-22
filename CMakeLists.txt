@@ -61,13 +61,7 @@ file(GLOB UWS_HEADERS
   uSockets/src/internal/networking/*.h
   uSocket/src/interfaces/*.h
 )
-
-install(
-  FILES ${UWS_HEADERS}
-  COMPONENT ${PROJECT_NAME}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/uWebSockets
-  PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
-)
+file(COPY ${UWS_HEADERS} DESTINATION ${CMAKE_INSTALL_PREFIX}/include/uWebSockets)
 
 file(GLOB F_2 src/f2/function2.hpp)
 install(
