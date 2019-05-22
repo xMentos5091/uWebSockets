@@ -64,13 +64,49 @@ install(
   PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
 )
 
+file(GLOB USOCK_INT_NETWORK
+  uSockets/src/internal/networking/*.h
+)
+install(
+  FILES ${USOCK_INT_NETWORK}
+  COMPONENT ${PROJECT_NAME}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/uWebSockets/uSockets/internal/networking
+  PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
+)
+
+file(GLOB USOCK_INT_EVENTING
+  uSockets/src/internal/eventing/*.h
+)
+install(
+  FILES ${USOCK_INT_EVENTING}
+  COMPONENT ${PROJECT_NAME}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/uWebSockets/uSockets/internal/eventing
+  PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
+)
+
+file(GLOB USOCK_INT
+  uSockets/src/internal/*.h
+)
+install(
+  FILES ${USOCK_INT}
+  COMPONENT ${PROJECT_NAME}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/uWebSockets/uSockets/internal
+  PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
+)
+
+file(GLOB USOCKETS
+  uSockets/src/*.h
+)
+install(
+  FILES ${USOCKETS}
+  COMPONENT ${PROJECT_NAME}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/uWebSockets/uSockets
+  PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
+)
+
 file(GLOB UWS_HEADERS
   src/*.h
   src/libwshandshake.hpp
-  uSockets/src/*.h
-  uSockets/src/internal/*.h
-  uSockets/src/internal/eventing/*.h
-  uSockets/src/internal/networking/*.h
 )
 install(
   FILES ${UWS_HEADERS}
