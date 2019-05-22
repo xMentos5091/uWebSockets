@@ -12,6 +12,7 @@ include_directories(${CMAKE_INSTALL_PREFIX}/include/uWebSockets/uSockets)
 include_directories(uSockets/src)
 set(uWebSockets_src
   uSockets/src/ssl.c
+  uSockets/src/interfaces/ssl.h
   uSockets/src/socket.c
   uSockets/src/loop.c
   uSockets/src/context.c
