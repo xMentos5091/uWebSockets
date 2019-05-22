@@ -53,8 +53,12 @@ link_directories(${ZLIB_LIBRARIES})
 list(APPEND LIB_LIST ${ZLIB_LIBRARIES})
 
 file(GLOB UWS_HEADERS src/*.h src/libwshandshake.hpp src/f2/function2.hpp)
-file(COPY ${UWS_HEADERS} DESTINATION ${CMAKE_INSTALL_PREFIX}/external/include/uWebSockets)
-
+install(
+  FILES ${UWS_HEADERS}
+  COMPONENT ${PROJECT_NAME}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/external/include/uWebSockets
+  PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
+)
 
 file(GLOB USOCKETS_HEADERS
   uSockets/src/*.h
@@ -63,7 +67,13 @@ file(GLOB USOCKETS_HEADERS
   uSockets/src/internal/networking/*.h
   uSocket/src/interfaces/*.h
 )
-file(COPY ${USOCKETS_HEADERS} DESTINATION ${CMAKE_INSTALL_PREFIX}/external/include/uWebSockets/uSockets)
+
+install(
+  FILES ${USOCKETS_HEADERS}
+  COMPONENT ${PROJECT_NAME}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/external/include/uWebSockets/uSockets
+  PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
+)
 
 include_directories(${CMAKE_INSTALL_PREFIX}/external/include/uWebSockets)
 include_directories(${CMAKE_INSTALL_PREFIX}/external/include/uWebSockets/uSockets)
