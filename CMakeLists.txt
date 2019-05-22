@@ -52,6 +52,16 @@ include_directories(${ZLIB_INCLUDE_DIR})
 link_directories(${ZLIB_LIBRARIES})
 list(APPEND LIB_LIST ${ZLIB_LIBRARIES})
 
+file(GLOB USOCK_INTERF
+  uSocket/src/interfaces/*.h
+)
+install(
+  FILES ${USOCK_INTERF}
+  COMPONENT ${PROJECT_NAME}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/uWebSockets/uSockets/interfaces
+  PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
+)
+
 file(GLOB UWS_HEADERS
   src/*.h
   src/libwshandshake.hpp
@@ -59,9 +69,13 @@ file(GLOB UWS_HEADERS
   uSockets/src/internal/*.h
   uSockets/src/internal/eventing/*.h
   uSockets/src/internal/networking/*.h
-  uSocket/src/interfaces/*.h
 )
-file(COPY ${UWS_HEADERS} DESTINATION ${CMAKE_INSTALL_PREFIX}/include/uWebSockets)
+install(
+  FILES ${UWS_HEADERS}
+  COMPONENT ${PROJECT_NAME}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/uWebSockets
+  PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
+)
 
 file(GLOB F_2 src/f2/function2.hpp)
 install(
@@ -72,5 +86,6 @@ install(
 )
 
 include_directories(SYSTEM ${CMAKE_INSTALL_PREFIX}/include/uWebSockets)
+include_directories(SYSTEM ${CMAKE_INSTALL_PREFIX}/include/uWebSockets/uSockets)
 add_library(uWS SHARED ${uWebSockets_src})
 target_link_libraries(uWS ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES}) # miss libuv
