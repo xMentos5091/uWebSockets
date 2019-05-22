@@ -52,7 +52,16 @@ include_directories(${ZLIB_INCLUDE_DIR})
 link_directories(${ZLIB_LIBRARIES})
 list(APPEND LIB_LIST ${ZLIB_LIBRARIES})
 
-file(GLOB UWS_HEADERS src/*.h src/libwshandshake.hpp src/f2/function2.hpp)
+file(GLOB UWS_HEADERS
+  src/*.h
+  src/libwshandshake.hpp
+  uSockets/src/*.h
+  uSockets/src/internal/*.h
+  uSockets/src/internal/eventing/*.h
+  uSockets/src/internal/networking/*.h
+uSocket/src/interfaces/*.h
+)
+
 install(
   FILES ${UWS_HEADERS}
   COMPONENT ${PROJECT_NAME}
@@ -60,18 +69,11 @@ install(
   PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
 )
 
-file(GLOB USOCKETS_HEADERS
-  uSockets/src/*.h
-  uSockets/src/internal/*.h
-  uSockets/src/internal/eventing/*.h
-  uSockets/src/internal/networking/*.h
-  uSocket/src/interfaces/*.h
-)
-
+file(GLOB F_2 src/f2/function2.hpp)
 install(
-  FILES ${USOCKETS_HEADERS}
+  FILES ${UWS_HEADERS}
   COMPONENT ${PROJECT_NAME}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/uWebSockets/uSockets
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/uWebSockets/f2
   PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
 )
 
