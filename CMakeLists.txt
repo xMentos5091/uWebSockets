@@ -9,6 +9,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_INSTALL_PREFIX}/lib)
 
 include_directories(${CMAKE_INSTALL_PREFIX}/include/uWebSockets)
 include_directories(${CMAKE_INSTALL_PREFIX}/include/uWebSockets/uSockets)
+include_directories(uSockets/src)
 set(uWebSockets_src
   uSockets/src/ssl.c
   uSockets/src/socket.c
