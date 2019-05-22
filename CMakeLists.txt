@@ -85,7 +85,7 @@ install(
   PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
 )
 
-include_directories(SYSTEM ${CMAKE_INSTALL_PREFIX}/include/uWebSockets)
-include_directories(SYSTEM ${CMAKE_INSTALL_PREFIX}/include/uWebSockets/uSockets)
+include_directories(${CMAKE_INSTALL_PREFIX}/include/uWebSockets)
+include_directories(${CMAKE_INSTALL_PREFIX}/include/uWebSockets/uSockets)
 add_library(uWS SHARED ${uWebSockets_src})
 target_link_libraries(uWS ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES}) # miss libuv
