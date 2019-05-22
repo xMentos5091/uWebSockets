@@ -38,13 +38,35 @@ set(uWebSockets_src
   src/f2/function2.hpp
 )
 
-file(GLOB HEADERS src/*.h src/libwshandshake.hpp src/f2/function2.hpp)
-install(
-    FILES ${HEADERS}
-    COMPONENT ${PROJECT_NAME}
-    DESTINATION ${CMAKE_INSTALL_PREFIX}/external/include/uWebSockets
-    PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
+include(FindOpenSSL)
+message("OpenSSL include dir: ${OPENSSL_INCLUDE_DIR}")
+message("OpenSSL libraries: ${OPENSSL_LIBRARIES}")
+include_directories(${OPENSSL_INCLUDE_DIR})
+link_directories(${OPENSSL_LIBRARIES})
+list(APPEND LIB_LIST ${OPENSSL_LIBRARIES})
+
+include(FindZLIB)
+message("ZLIB include dir: ${ZLIB_INCLUDE_DIR}")
+message("ZLIB libraries: ${ZLIB_LIBRARIES}")
+include_directories(${ZLIB_INCLUDE_DIR})
+link_directories(${ZLIB_LIBRARIES})
+list(APPEND LIB_LIST ${ZLIB_LIBRARIES})
+
+file(GLOB UWS_HEADERS src/*.h src/libwshandshake.hpp src/f2/function2.hpp)
+file(COPY ${UWS_HEADERS} DESTINATION ${CMAKE_INSTALL_PREFIX}/external/include/uWebSockets)
+
+
+file(GLOB USOCKETS_HEADERS
+  uSockets/src/*.h
+  uSockets/src/internal/*.h
+  uSockets/src/internal/eventing/*.h
+  uSockets/src/internal/networking/*.h
+  uSocket/src/interfaces/*.h
 )
+file(COPY ${USOCKETS_HEADERS} DESTINATION ${CMAKE_INSTALL_PREFIX}/external/include/uWebSockets/uSockets)
+
+include_directories(${CMAKE_INSTALL_PREFIX}/external/include/uWebSockets)
+include_directories(${CMAKE_INSTALL_PREFIX}/external/include/uWebSockets/uSockets)
 
 add_library(uWS SHARED ${uWebSockets_src})
-target_link_libraries(uWS ${ZLIB} ${OPENSSL}) # miss libuv
+target_link_libraries(uWS ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES}) # miss libuv
