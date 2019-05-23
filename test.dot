@@ -1,0 +1,16 @@
+digraph "GG" {
+node [
+  fontsize = "12"
+];
+    "node2" [ label="test_main" shape="house"];
+    "node8" [ label="/usr/lib/x86_64-linux-gnu/libz.so" shape="ellipse"];
+    "node2" -> "node8" // test_main -> /usr/lib/x86_64-linux-gnu/libz.so
+    "node4" [ label="uS" shape="polygon"];
+    "node2" -> "node4" // test_main -> uS
+    "node11" [ label="/usr/lib/x86_64-linux-gnu/libcrypto.so" shape="ellipse"];
+    "node4" -> "node11" // uS -> /usr/lib/x86_64-linux-gnu/libcrypto.so
+    "node10" [ label="/usr/lib/x86_64-linux-gnu/libssl.so" shape="ellipse"];
+    "node4" -> "node10" // uS -> /usr/lib/x86_64-linux-gnu/libssl.so
+    "node9" [ label="/usr/lib/x86_64-linux-gnu/libuv.so" shape="ellipse"];
+    "node4" -> "node9" // uS -> /usr/lib/x86_64-linux-gnu/libuv.so
+}
