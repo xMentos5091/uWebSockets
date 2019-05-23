@@ -39,7 +39,7 @@ include(FindOpenSSL)
 message("OpenSSL include dir: ${OPENSSL_INCLUDE_DIR}")
 message("OpenSSL libraries: ${OPENSSL_LIBRARIES}")
 include_directories(${OPENSSL_INCLUDE_DIR})
-link_directories(${OPENSSL_LIBRARIES})
+link_directories(${OPENSSL_LIBRARIES}) 
 list(APPEND LIB_LIST ${OPENSSL_LIBRARIES})
 
 add_library(uS SHARED ${uSockets_src})
